@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "635545814585",
+    "firebase_url": "https://sapientiaads.firebaseio.com",
+    "project_id": "sapientiaads",
+    "storage_bucket": "sapientiaads.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635545814585:android:f80a59747b0a2eb2",
+        "android_client_info": {
+          "package_name": "com.example.norbert.myapplicationgit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "635545814585-tocp0inar9mpe3gq8dckg4ad379b3e7g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCxExje4ZItZGXxcfdhi20yb7724FRezY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
