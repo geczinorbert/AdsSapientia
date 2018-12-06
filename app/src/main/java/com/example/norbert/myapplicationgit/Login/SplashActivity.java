@@ -1,4 +1,4 @@
-package com.example.norbert.myapplicationgit;
+package com.example.norbert.myapplicationgit.Login;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+import com.example.norbert.myapplicationgit.Login.LoginActivity;
+import com.example.norbert.myapplicationgit.R;
 
 public class SplashActivity extends AppCompatActivity {
 

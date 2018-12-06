@@ -1,8 +1,8 @@
-package com.example.norbert.myapplicationgit;
+package com.example.norbert.myapplicationgit.Login;
 
 import java.util.ArrayList;
 
-public class User {
+public class    User {
 
     private String phonenumber;
     private String lastname;
