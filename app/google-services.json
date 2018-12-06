@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "635545814585-ibhns0n20pkrccmh8oahke9sg1rvloof.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.norbert.myapplicationgit",
+            "certificate_hash": "f214307e40bee6ee9f3b78f1b7ccede69263b672"
+          }
+        },
+        {
+          "client_id": "635545814585-6e5a401lupnfpvsgkd777p79g79vc6tb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.norbert.myapplicationgit",
+            "certificate_hash": "ece280b6c2d48bf818d4ad4c2d675167e9be064d"
+          }
+        },
+        {
           "client_id": "635545814585-tocp0inar9mpe3gq8dckg4ad379b3e7g.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +45,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "635545814585-tocp0inar9mpe3gq8dckg4ad379b3e7g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
