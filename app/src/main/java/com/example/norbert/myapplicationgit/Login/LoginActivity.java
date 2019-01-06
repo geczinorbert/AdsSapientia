@@ -1,6 +1,8 @@
 package com.example.norbert.myapplicationgit.Login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -111,6 +113,10 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            SharedPreferences settigns = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                            SharedPreferences.Editor editor = settigns.edit();
+                            editor.putString("username",editTextPhonenumber.getText().toString());
+                            editor.apply();
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                             finish();
                         } else {

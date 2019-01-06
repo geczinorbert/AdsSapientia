@@ -66,9 +66,12 @@ public class HomeFragment extends Fragment {
                     Ads listDataAds = new Ads();
                     assert ads != null;
                     String title = ads.getTitle();
-                    String shortdesc = ads.getShortDesc();
+                    String shortDescription = ads.getShortDescription();
+                    String longDescription = ads.getLongDescription();
+                    String phoneNumber = ads.getPhoneNumber();
+                    String locationText = ads.getLocationText();
                     listDataAds.setTitle(title);
-                    listDataAds.setShortDesc(shortdesc);
+                    listDataAds.setShortDescription(shortDescription);
                     list.add(listDataAds);
                 }
             }

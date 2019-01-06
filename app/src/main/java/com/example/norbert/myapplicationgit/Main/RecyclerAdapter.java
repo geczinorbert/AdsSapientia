@@ -63,7 +63,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(RecyclerAdapter.ViewHolder viewHolder,final int i) {
         viewHolder.itemTitle.setText(this.listDataAds.get(i).getTitle());
-        viewHolder.itemDetail.setText(this.listDataAds.get(i).getShortDesc());
+        viewHolder.itemDetail.setText(this.listDataAds.get(i).getShortDescription());
         //viewHolder.itemImage.setImageResource(images[i]);
     }
 

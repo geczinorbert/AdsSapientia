@@ -3,22 +3,118 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Main.ProfilFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="hello_blank_fragment3" />
-
     <Button
-        android:id="@+id/button"
-        android:layout_width="151dp"
-        android:layout_height="104dp"
+        android:id="@+id/fragment_profil_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="95dp"
-        android:layout_marginTop="149dp"
-        android:text="Profil" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="33dp"
+        android:text="Logout" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/fragment_profil_logout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-14dp"
+        android:src="@mipmap/ic_launcher_round" />
+
+    <Button
+        android:id="@+id/fragment_profil_button_my_ads"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="33dp"
+        android:text="MyAds" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/fragment_profil_firstname_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="118dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/fragment_profil_firstname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Firstname" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/fragment_profil_lastname_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragment_profil_firstname_layout"
+        android:layout_marginTop="10dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/fragment_profil_lastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/fragment_profil_lastname_layout"
+            android:hint="Lastname" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/fragment_profil_email_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragment_profil_lastname_layout"
+        android:layout_marginTop="10dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/fragment_profil_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/fragment_profil_phonenumber_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragment_profil_email_layout"
+        android:layout_marginTop="10dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/fragment_profil_phonenumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/fragment_profil_phonenumber_layout"
+            android:hint="Phonenumber" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/fragment_profil_address_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragment_profil_phonenumber_layout"
+        android:layout_marginTop="10dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/fragment_profil_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Address" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/fragment_profil_button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="66dp"
+        android:text="Save" />
 </RelativeLayout>

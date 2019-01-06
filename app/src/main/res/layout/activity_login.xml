@@ -64,6 +64,7 @@
             android:layout_height="wrap_content"
             android:hint="code"
             android:textColor="@color/colorPrimaryDark" />
+
     </android.support.design.widget.TextInputLayout>
 
     <Button
