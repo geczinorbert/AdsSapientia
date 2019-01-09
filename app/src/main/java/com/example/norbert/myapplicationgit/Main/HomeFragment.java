@@ -25,14 +25,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
-    RecyclerView.Adapter adapter;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.Adapter adapter;
     private DrawerLayout mdrawerlayout;
     private ActionBarDrawerToggle mtoogle;
-    NavigationView navigationView;
-    FirebaseDatabase database;
-    DatabaseReference ref;
+    private NavigationView navigationView;
+    private FirebaseDatabase database;
+    private DatabaseReference ref;
 
     @Nullable
     @Override
@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("Ads");
         List<Ads> listDataAds =  getDataFromDatabase();
-        adapter = new RecyclerAdapter(listDataAds);
+        adapter = new RecyclerAdapter(listDataAds,getContext());
 
 
         recyclerView.setAdapter(adapter);
@@ -70,8 +70,14 @@ public class HomeFragment extends Fragment {
                     String longDescription = ads.getLongDescription();
                     String phoneNumber = ads.getPhoneNumber();
                     String locationText = ads.getLocationText();
+                    String image = ads.getImage();
+                    System.out.println("TAG 2" + ads.getImage());
                     listDataAds.setTitle(title);
                     listDataAds.setShortDescription(shortDescription);
+                    listDataAds.setImage(image);
+                    listDataAds.setLongDescription(longDescription);
+                    listDataAds.setPhoneNumber(phoneNumber);
+                    listDataAds.setLocationText(locationText);
                     list.add(listDataAds);
                 }
             }

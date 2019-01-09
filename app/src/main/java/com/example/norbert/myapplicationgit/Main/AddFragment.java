@@ -6,8 +6,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -88,7 +90,7 @@ public class AddFragment extends Fragment {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"Hello",Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(),"Starting upload",Toast.LENGTH_SHORT).show();
                 uploadFile();
             }
         });
@@ -148,12 +150,14 @@ public class AddFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(getActivity(), "Upload successful: ", Toast.LENGTH_SHORT).show();
+                         Toast.makeText(getActivity(), "Upload successful: ", Toast.LENGTH_SHORT).show();
                         Uri downloadUri = task.getResult();
-                        System.out.println("TAG771 profile pic: uri\t" + downloadUri.toString());
+                        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                        SharedPreferences.Editor editor = settings.edit();
+                        final String signed_user = settings.getString("username","Dummy");
                         Ads ads = new Ads(textViewTitle.getText().toString(),textViewShortDescription.getText().toString(),
                                 textViewLongDescription.getText().toString(),textViewPhoneNumber.getText().toString(),
-                                textViewLocationText.getText().toString(),downloadUri.toString(),"Mickey");
+                                textViewLocationText.getText().toString(),downloadUri.toString(),signed_user);
                         refDatabaseStorage.child(textViewTitle.getText().toString()).setValue(ads);
                     }else
                     {

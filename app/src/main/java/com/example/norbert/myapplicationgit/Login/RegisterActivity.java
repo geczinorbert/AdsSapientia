@@ -71,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void writeNewUsers(){
-        User user = new User(phonenumber.getText().toString(),lastname.getText().toString(),firstname.getText().toString());
+        User user = new User(phonenumber.getText().toString(),lastname.getText().toString(),firstname.getText().toString(),"Dummy","Dummy" ,"Dummy");
 
         ref.child(user.getPhonenumber()).setValue(user);
 
