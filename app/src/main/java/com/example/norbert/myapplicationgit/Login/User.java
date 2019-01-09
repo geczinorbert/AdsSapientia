@@ -7,9 +7,9 @@ public class    User {
     private String phonenumber;
     private String lastname;
     private String firstname;
+    private String email;
+    private String adress;
     private String image;
-    private ArrayList<String> intrests;
-    private Boolean admin;
 
     public User(){
     }
@@ -18,19 +18,14 @@ public class    User {
         this.phonenumber = phonenumber;
     }
 
-    public User(String phonenumber, String lastname,String firstname, String image, ArrayList<String> intrests, Boolean admin) {
-        this.phonenumber = phonenumber;
-        this.lastname = lastname;
-        this.firstname = firstname;
-        this.image = image;
-        this.intrests = intrests;
-        this.admin = admin;
-    }
 
-    public User(String phonenumber, String lastname,String firstname) {
+    public User(String phonenumber, String lastname,String firstname,String email,String adress,String image) {
         this.phonenumber = phonenumber;
         this.lastname = lastname;
         this.firstname = firstname;
+        this.email = email;
+        this.adress = adress;
+        this.image = image;
     }
 
     public String getPhonenumber() {
@@ -45,14 +40,6 @@ public class    User {
 
     public String getImage() {
         return image;
-    }
-
-    public ArrayList<String> getIntrests() {
-        return intrests;
-    }
-
-    public Boolean getAdmin() {
-        return admin;
     }
 
     public void setPhonenumber(String phonenumber) {
@@ -71,12 +58,19 @@ public class    User {
         this.image = image;
     }
 
-    public void setIntrests(ArrayList<String> intrests) {
-        this.intrests = intrests;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
 }

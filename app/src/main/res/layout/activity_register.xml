@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:colorControlNormal="@color/colorAccent"
             android:hint="Phone number"
+            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark" />
     </android.support.design.widget.TextInputLayout>
 
@@ -50,6 +51,7 @@
             android:layout_height="wrap_content"
             android:colorControlNormal="@color/colorAccent"
             android:hint="Code"
+            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark" />
     </android.support.design.widget.TextInputLayout>
 
@@ -73,6 +75,7 @@
             android:layout_height="wrap_content"
             android:colorControlNormal="@color/colorAccent"
             android:hint="Firstname"
+            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark" />
     </android.support.design.widget.TextInputLayout>
 
@@ -96,6 +99,7 @@
             android:layout_height="wrap_content"
             android:colorControlNormal="@color/colorAccent"
             android:hint="Lastname"
+            android:singleLine="true"
             android:textColor="@color/colorPrimaryDark" />
     </android.support.design.widget.TextInputLayout>
 
