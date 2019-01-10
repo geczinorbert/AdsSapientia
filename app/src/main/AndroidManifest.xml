@@ -19,19 +19,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login.SplashActivity">
+
+        <activity android:name=".Login.SplashActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login.LoginActivity" />
-        <activity android:name=".Login.RegisterActivity" />
+        <activity android:name=".Login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Login.RegisterActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Main.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -43,8 +48,10 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".Main.DetailsActivity" />
-        <activity android:name=".Main.MyadsActivity"></activity>
+        <activity android:name=".Main.DetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Main.MyadsActivity"
+            android:screenOrientation="portrait" ></activity>
     </application>
 
 </manifest>

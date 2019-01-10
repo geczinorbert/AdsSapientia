@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.example.norbert.myapplicationgit.Login.LoginActivity;
 import com.example.norbert.myapplicationgit.Main.MainActivity;
 import com.example.norbert.myapplicationgit.R;
 

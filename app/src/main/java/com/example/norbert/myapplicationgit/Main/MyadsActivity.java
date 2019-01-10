@@ -80,7 +80,6 @@ public class MyadsActivity extends AppCompatActivity {
                         String phoneNumber = ads.getPhoneNumber();
                         String locationText = ads.getLocationText();
                         String image = ads.getImage();
-                        System.out.println("TAG 2" + ads.getImage());
                         listDataAds.setTitle(title);
                         listDataAds.setShortDescription(shortDescription);
                         listDataAds.setImage(image);

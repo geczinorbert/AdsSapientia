@@ -112,12 +112,6 @@ public class AddFragment extends Fragment {
         if( requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null){
             mImageUri = data.getData();
-            System.out.println("TAG771 profile pic: \t" + mImageUri.toString());
-            System.out.println("TAG771 profile pic: t\t" + textViewTitle.getText().toString());
-            System.out.println("TAG771 profile pic: s\t" + textViewShortDescription.getText().toString());
-            System.out.println("TAG771 profile pic: l\t" + textViewLongDescription.getText().toString());
-            System.out.println("TAG771 profile pic: p\t" + textViewPhoneNumber.getText().toString());
-            System.out.println("TAG771 profile pic: loc\t" + textViewLocationText.getText().toString());
             Glide.with(AddFragment.this)
                     .load(mImageUri)
                     .apply(new RequestOptions().override(500,500))

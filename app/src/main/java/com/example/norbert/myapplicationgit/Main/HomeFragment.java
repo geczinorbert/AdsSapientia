@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
@@ -52,7 +52,6 @@ public class HomeFragment extends Fragment {
 
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-       /// Toast.makeText(getActivity(),"Text!",Toast.LENGTH_SHORT).show();
         return rootView;
     }
 
@@ -71,7 +70,6 @@ public class HomeFragment extends Fragment {
                     String phoneNumber = ads.getPhoneNumber();
                     String locationText = ads.getLocationText();
                     String image = ads.getImage();
-                    System.out.println("TAG 2" + ads.getImage());
                     listDataAds.setTitle(title);
                     listDataAds.setShortDescription(shortDescription);
                     listDataAds.setImage(image);
