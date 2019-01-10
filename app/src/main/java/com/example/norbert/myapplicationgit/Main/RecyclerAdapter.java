@@ -25,11 +25,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
-    FirebaseDatabase database;
-    FirebaseAuth mAuth;
-    DatabaseReference ref;
-    List<Ads> listDataAds;
-    Context context;;
+    private FirebaseDatabase database;
+    private FirebaseAuth mAuth;
+    private DatabaseReference ref;
+    private List<Ads> listDataAds;
+    private Context context;;
 
     public RecyclerAdapter(List<Ads> listDataAds,Context context_) {
         this.listDataAds = listDataAds;
@@ -76,7 +76,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public void onBindViewHolder(RecyclerAdapter.ViewHolder viewHolder,final int i) {
         viewHolder.itemTitle.setText(this.listDataAds.get(i).getTitle());
         viewHolder.itemDetail.setText(this.listDataAds.get(i).getShortDescription());
-        System.out.println("TAG 1" + listDataAds.get(i).getShortDescription());
         Glide.with(context)
                 .load(this.listDataAds.get(i).getImage())
                 .into(viewHolder.itemImage);

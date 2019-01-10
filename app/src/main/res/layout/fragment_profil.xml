@@ -29,10 +29,10 @@
         android:id="@+id/fragment_profil_button_my_ads"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="33dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="34dp"
         android:text="MyAds" />
 
     <android.support.design.widget.TextInputLayout
@@ -114,7 +114,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="66dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="37dp"
         android:text="Save" />
+
+    <Button
+        android:id="@+id/profil_fragment_choose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="6dp"
+        android:text="Upload" />
 </RelativeLayout>

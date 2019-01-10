@@ -51,7 +51,6 @@ import java.util.Objects;
 import static android.app.Activity.RESULT_OK;
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
-
 public class ProfilFragment extends Fragment {
 
     private TextView firstname_textview;
@@ -65,51 +64,19 @@ public class ProfilFragment extends Fragment {
     private StorageReference mStorageRef;
     private String user_number;
     private static final int CAMERA_REQUEST_CODE = 1;
-    private Uri imageUri;
-    private Uri uri;
+    private Uri mImageUri;
     private String mCurrentPhotoPath;
-
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
-
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            // Create the File where the photo should go
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // Error occurred while creating the File...
-            }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(getActivity().getApplicationContext(),
-                        "com.example.norbert.myapplicationgit.provider", photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
-            }
-        }
-    }
+    private  Button save_button;
+    private Button logout_button;
+    private Button choose_picture;
+    private Button my_ads;
+    private static final int PICK_IMAGE_REQUEST = 1;
+    private DatabaseReference mDatabaseref;
+    private Uri downloadUri;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_profil, container, false);
 
         firstname_textview = (EditText) rootView.findViewById(R.id.fragment_profil_firstname);
@@ -117,10 +84,11 @@ public class ProfilFragment extends Fragment {
         email_textview = (EditText) rootView.findViewById(R.id.fragment_profil_email);
         phonenumber_textview = (EditText) rootView.findViewById(R.id.fragment_profil_phonenumber);
         address_textview = (EditText) rootView.findViewById(R.id.fragment_profil_address);
-        Button save_button = (Button) rootView.findViewById(R.id.fragment_profil_button_save);
-        Button logout_button = (Button) rootView.findViewById(R.id.fragment_profil_logout);
+        save_button = (Button) rootView.findViewById(R.id.fragment_profil_button_save);
+        logout_button = (Button) rootView.findViewById(R.id.fragment_profil_logout);
         profil_image = (ImageView) rootView.findViewById(R.id.fragment_profil_image);
-        Button my_ads = (Button) rootView.findViewById(R.id.fragment_profil_button_my_ads);
+        my_ads = (Button) rootView.findViewById(R.id.fragment_profil_button_my_ads);
+        choose_picture = (Button) rootView.findViewById(R.id.profil_fragment_choose);
 
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         SharedPreferences.Editor editor = settings.edit();
@@ -131,6 +99,7 @@ public class ProfilFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("User");
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
+        mDatabaseref = FirebaseDatabase.getInstance().getReference("User");
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -145,12 +114,14 @@ public class ProfilFragment extends Fragment {
                         String phonenumber = user.getPhonenumber();
                         String email = user.getEmail();
                         String adress = user.getAdress();
+                        String image = user.getImage();
                         listDataUser.setFirstname(firstname);
                         listDataUser.setLastname(lastname);
                         listDataUser.setPhonenumber(phonenumber);
                         listDataUser.setEmail(email);
                         listDataUser.setAdress(adress);
-                        setText(firstname, lastname, phonenumber, email, adress);
+                        listDataUser.setImage(image);
+                        setText(firstname, lastname, phonenumber, email, adress,image);
                     }
                 }
             }
@@ -164,7 +135,8 @@ public class ProfilFragment extends Fragment {
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveChanges(s);
+                //saveChanges(s);
+                uploadFile();
             }
         });
 
@@ -179,13 +151,6 @@ public class ProfilFragment extends Fragment {
             }
         });
 
-        profil_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dispatchTakePictureIntent();
-            }
-        });
-
         my_ads.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,10 +159,42 @@ public class ProfilFragment extends Fragment {
             }
         });
 
+        profil_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //openFileChooser();
+            }
+        });
+
+        choose_picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "Starting upload ", Toast.LENGTH_SHORT).show();
+                //uploadFile();
+                openFileChooser();
+            }
+        });
+
         return rootView;
     }
 
-    private void setText(String firstname, String lastname, String phonenumber, String email, String adres) {
+
+    private void setText(String firstname, String lastname, String phonenumber, String email, String adres,String image) {
+        firstname_textview.setText(firstname);
+        lastname_textview.setText(lastname);
+        phonenumber_textview.setText(phonenumber);
+        if (!email.equals("Dummy") && !adres.equals("Dummy") && !image.equals("https://images.idgesg.net/images/article/2017/08/android_robot_logo_by_ornecolorada_cc0_via_pixabay1904852_wide-100732483-large.jpg")) {
+            email_textview.setText(email);
+            address_textview.setText(adres);
+            Glide.with(ProfilFragment.this)
+                    .load(image)
+                    .apply(new RequestOptions().override(500, 500))
+                    .into(profil_image);
+
+        }
+    }
+
+    private void setText1(String firstname,String lastname,String phonenumber,String email,String adres) {
         firstname_textview.setText(firstname);
         lastname_textview.setText(lastname);
         phonenumber_textview.setText(phonenumber);
@@ -211,7 +208,6 @@ public class ProfilFragment extends Fragment {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                System.out.println("TAG 11" + s);
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     if (Objects.equals(dataSnapshot1.getKey(), s)) {
                         User user = dataSnapshot1.getValue(User.class);
@@ -229,11 +225,10 @@ public class ProfilFragment extends Fragment {
                         listDataUser.setAdress(address_textview.getText().toString());
                         uploadFile();
                         ref.child(s).setValue(listDataUser);
-                        setText(firstname, lastname, phonenumber, email, adress);
+                        setText1(firstname, lastname, phonenumber, email, adress);
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -244,23 +239,35 @@ public class ProfilFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        System.out.println("Tag 1" + "fuggvenyben");
-        if (resultCode == RESULT_OK) {
-            Glide.with(ProfilFragment.this)
-                    .load(mCurrentPhotoPath)
-                    .apply(new RequestOptions().override(500, 500))
-                    .into(profil_image);
+                if( requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                        && data != null && data.getData() != null){
+                    mImageUri = data.getData();
 
-            System.out.println("TAG 1 : " + mCurrentPhotoPath + "    : " + Uri.parse(mCurrentPhotoPath).toString());
-
-        }
+                    Glide.with(this)
+                            .load(mImageUri)
+                            .apply(new RequestOptions().override(500,500))
+                            .into(profil_image);
+                }
     }
+
+    public void openFileChooser(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,PICK_IMAGE_REQUEST);
+    }
+
+    private String getFileExtension(Uri uri){
+        ContentResolver cR = getActivity().getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
     private void uploadFile(){
-        imageUri = Uri.parse(String.valueOf(new File(mCurrentPhotoPath)));
-        if(mCurrentPhotoPath != null){
+        if(mImageUri != null){
             final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis() +
-                    "." + getFileExtension(imageUri));
-            fileReference.putFile(imageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    "." + getFileExtension(mImageUri));
+            fileReference.putFile(mImageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                     if(!task.isSuccessful()){
@@ -273,12 +280,20 @@ public class ProfilFragment extends Fragment {
                 public void onComplete(@NonNull Task<Uri> task) {
                     if(task.isSuccessful()){
                         Toast.makeText(getActivity(), "Upload successful: ", Toast.LENGTH_SHORT).show();
-                        Uri downloadUri = task.getResult();
-                        System.out.println("TAG771 profile pic: \t" + downloadUri.toString());
-                        DatabaseReference mDatabaseref = FirebaseDatabase.getInstance().getReference("uploads");
-                        Upload upload = new Upload("Dummy",
-                                downloadUri.toString());
-                        mDatabaseref.child(user_number).setValue(upload);
+                        downloadUri = task.getResult();
+                        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                        SharedPreferences.Editor editor = settings.edit();
+                        final String signed_user = settings.getString("username","Dummy");
+                        Upload upload = new Upload(signed_user, downloadUri.toString());
+                        User listDataUser = new User();
+                        listDataUser.setFirstname(firstname_textview.getText().toString());
+                        listDataUser.setLastname(lastname_textview.getText().toString());
+                        listDataUser.setPhonenumber(phonenumber_textview.getText().toString());
+                        listDataUser.setEmail(email_textview.getText().toString());
+                        listDataUser.setAdress(address_textview.getText().toString());
+                        listDataUser.setImage(downloadUri.toString());
+                        mDatabaseref.child(user_number).setValue(listDataUser);
+
                     }else
                     {
                         Toast.makeText(getActivity(), "upload failed: " + task.getException(), Toast.LENGTH_SHORT).show();
@@ -286,12 +301,6 @@ public class ProfilFragment extends Fragment {
                 }
             });
         }
-    }
-
-    private String getFileExtension(Uri uri){
-        ContentResolver cR = getActivity().getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 }
 

@@ -25,12 +25,12 @@ import java.util.concurrent.TimeUnit;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    FirebaseDatabase database;
-    EditText phonenumber,lastname,firstname,code;
-    Button register,getCode;
-    DatabaseReference ref;
-    FirebaseAuth mAuth;
-    String codeSent;
+    private FirebaseDatabase database;
+    private EditText phonenumber,lastname,firstname,code;
+    private Button register,getCode;
+    private DatabaseReference ref;
+    private FirebaseAuth mAuth;
+    private String codeSent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void writeNewUsers(){
-        User user = new User(phonenumber.getText().toString(),lastname.getText().toString(),firstname.getText().toString(),"Dummy","Dummy" ,"Dummy");
+        String dummyImage = "https://images.idgesg.net/images/article/2017/08/android_robot_logo_by_ornecolorada_cc0_via_pixabay1904852_wide-100732483-large.jpg";
+        User user = new User(phonenumber.getText().toString(),lastname.getText().toString(),firstname.getText().toString(),"Dummy","Dummy" ,dummyImage);
 
         ref.child(user.getPhonenumber()).setValue(user);
 
@@ -115,7 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         if(phone.length() < 10){
-            phonenumber.setError("Enter a valid phonenumber");
+            phonenumber.setError("Enter a valid phone number");
             phonenumber.requestFocus();
             return;
         }
